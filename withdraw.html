@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Withdraw - GrowUp Invest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #dc3545; /* warm red like Nepali flag */
+      --secondary: #ffc107; /* golden coin */
+      --dark: #212529;
+      --light: #f8f9fa;
+      --card-bg: #ffffff;
+      --bg: linear-gradient(145deg, #f3f4f6, #dde3ea);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 4rem auto;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .back-btn {
+      background-color: #eee;
+      color: var(--dark);
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #ddd;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2 img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #ffe9b0, #ffd36b);
+      color: #111;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .balance-card::after {
+      content: 'NPR';
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+      background: #fff8e1;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .balance-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .balance-info {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: #333;
+    }
+
+    .withdraw-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .method {
+      background-color: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .method:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .method-logo {
+      height: 50px;
+      margin-bottom: 0.6rem;
+    }
+
+    .method-logo img {
+      max-height: 100%;
+      border-radius: 50%;
+    }
+
+    .method span {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .withdraw-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .withdraw-btn:hover {
+      background-color: #bb2d3b;
+    }
+
+    .notice {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      text-align: center;
+      color: #c82333;
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/2165/2165063.png" alt="Coin Icon">Earnings</h2>
+
+    <div class="balance-card">
+      <div class="balance-amount">Rs 59,811.00</div>
+      <div class="balance-info">Your available balance in Grow-Up Invest</div>
+    </div>
+
+    <div class="withdraw-methods">
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/esewa_20200118185351%20(1).jpg" alt="Esewa Logo">
+        </div>
+        <span>Esewa</span>
+        <button class="withdraw-btn" onclick="window.location.href='another.html'">Withdraw Now</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/1674802727434_15aba63e-1877-4b9d-952e-227e23d4c811.png" alt="Khalti Logo">
+        </div>
+        <span>Khalti</span>
+        <button class="withdraw-btn" onclick="window.location.href='another.html'">Withdraw Now</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/unnamed.png" alt="IMEPay Logo">
+        </div>
+        <span>IMEPay</span>
+        <button class="withdraw-btn" onclick="window.location.href='another.html'">Withdraw Now</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/bank-icon-logo-design-vector.jpg" alt="Bank Logo">
+        </div>
+        <span>Bank</span>
+        <button class="withdraw-btn" onclick="window.location.href='another.html'">Withdraw Now</button>
+      </div>
+
+      <div class="method">
+        <div class="method-logo">
+          <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/6963703.png" alt="Card Logo">
+        </div>
+        <span>Card</span>
+        <button class="withdraw-btn" onclick="window.location.href='another.html'">Withdraw Now</button>
+      </div>
+    </div>
+
+    <div class="notice">
+      ⚠️ Trading Mode is ON — Please wait for it to complete before making a withdrawal.
+    </div>
+
+    <footer>
+      © 2025 Grow-Up Invest Nepal — Secure & Trusted
+    </footer>
+  </div>
+
+</body>
+</html>
