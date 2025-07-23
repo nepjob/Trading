@@ -1,340 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GrowUp Trading Dashboard</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GrowUp Trading Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-    * {
-      box-sizing: border-box;
-    }
+  /* Reset & basics */
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f5f7fa;
-      color: #2c3e50;
-    }
-   .earnings-btn {
-      background: #f1c40f;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      padding: 10px 16px;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/2541/2541988.png');
-      background-size: 20px;
-      background-repeat: no-repeat;
-      background-position: 10px center;
-      padding-left: 40px;
-      transition: background 0.3s ease;
-    }
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+  }
 
-    .earnings-btn:hover {
-      background: #d4ac0d;
-    }
+  /* Container */
+  .container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
 
+  /* Logo center */
+  .logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
 
+  .logo-container img {
+    max-width: 120px;
+  }
+
+  /* Titles */
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.25rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #34495e;
+  }
+
+  /* Back button */
+  .back-btn {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 10px 16px;
+    background: #e0e0e0;
+    color: #2c3e50;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: background 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+
+  .back-btn:hover {
+    background: #2980b9;
+    color: white;
+  }
+
+  /* Top bar - flex */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  /* Earnings buttons */
+  .earnings {
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 2px solid #2980b9;
+    color: #2980b9;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .earnings:hover {
+    background: #2980b9;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(41, 128, 185, 0.5);
+  }
+
+  /* Invest button */
+  .btn-invest {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 40px;
+    background: #27ae60;
+    color: white;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 14px 0;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(39, 174, 96, 0.4);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-invest:hover {
+    background: #219150;
+    box-shadow: 0 8px 22px rgba(33, 145, 80, 0.6);
+  }
+
+  /* Offer Header */
+  .offer-header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #e67e22;
+    letter-spacing: 1.2px;
+  }
+
+  /* Special offer image */
+  .special-offer {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .special-offer img {
+    max-width: 180px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(230, 126, 34, 0.35);
+    user-select: none;
+  }
+
+  .special-offer-text {
+    margin-top: 10px;
+    font-weight: 700;
+    color: #e67e22;
+    font-size: 1rem;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-bottom: 30px;
+  }
+
+  thead tr {
+    background: #2980b9;
+    color: white;
+    border-radius: 12px;
+  }
+
+  thead tr th {
+    padding: 14px 20px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  tbody tr {
+    background: #ecf0f1;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+    cursor: default;
+    border-radius: 10px;
+  }
+
+  tbody tr:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(41, 128, 185, 0.2);
+  }
+
+  tbody tr td {
+    padding: 14px 20px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  /* Note text */
+  .note {
+    text-align: center;
+    font-weight: 600;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+  }
+
+  /* Charts container */
+  .charts {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+  }
+
+  canvas {
+    flex: 1 1 45%;
+    max-width: 45%;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+    padding: 20px;
+  }
+
+  /* BTC Trading Info */
+  .btc-trading {
+    background: #f39c12;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    box-shadow: 0 0 15px #f39c12;
+  }
+
+  /* Level note */
+  .level-note {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #27ae60;
+  }
+
+  /* WhatsApp floating button */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #25D366;
+    color: white;
+    font-size: 26px;
+    padding: 16px 18px;
+    border-radius: 50%;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: background 0.3s ease;
+  }
+
+  .whatsapp-float:hover {
+    background: #1ebe57;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
     .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px 30px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      margin: 20px 15px;
+      padding: 25px 30px;
     }
 
-    .logo-container {
-      text-align: center;
-      margin-bottom: 20px;
+    .btn-invest {
+      max-width: 100%;
     }
 
-    .logo-container img {
-      width: 120px;
+    .charts canvas {
+      max-width: 100%;
+      flex-basis: 100%;
     }
+  }
 
+  @media (max-width: 480px) {
     h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      color: #2c3e50;
+      font-size: 1.6rem;
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      margin: 20px 0;
+    h2 {
+      font-size: 1.25rem;
     }
 
-    .earnings-btn {
-      background: #f1c40f;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      padding: 10px 16px;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/2541/2541988.png');
-      background-size: 20px;
-      background-repeat: no-repeat;
-      background-position: 10px center;
-      padding-left: 40px;
-      transition: background 0.3s ease;
+    .back-btn, .earnings {
+      font-size: 0.9rem;
+      padding: 10px 14px;
     }
 
-    .earnings-btn:hover {
-      background: #d4ac0d;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #e67e22;
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-    }
-
-    th, td {
-      padding: 14px;
-      text-align: left;
-    }
-
-    thead {
-      background: #2980b9;
-      color: white;
-    }
-
-    tbody tr:nth-child(even) {
-      background: #ecf0f1;
-    }
-
-    tbody tr:hover {
-      background: #d6eaf8;
+    .offer-header {
+      font-size: 1.1rem;
     }
 
     .note {
-      text-align: center;
-      font-weight: bold;
-      color: #7f8c8d;
-      margin-bottom: 40px;
+      font-size: 0.9rem;
     }
 
-    /* Modern Features Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .feature-card {
-      background: linear-gradient(135deg, #ffffff, #f9f9f9);
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: transform 0.2s;
-      cursor: default;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    }
-
-    .feature-icon {
-      font-size: 1.8rem;
-      margin-right: 10px;
-    }
-
-    .feature-label {
-      font-weight: 600;
+    .btc-trading {
       font-size: 1rem;
-      color: #2c3e50;
-      flex-grow: 1;
+      padding: 16px 20px;
     }
-
-    .feature-badge {
-      background-color: #e74c3c;
-      color: white;
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-weight: bold;
-      white-space: nowrap;
-      user-select: none;
-    }
-
-    .charts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    canvas {
-      flex: 1 1 45%;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-
-    .box-note {
-      padding: 20px;
-      border-left: 6px solid #27ae60;
-      background: #ecf9f1;
-      color: #27ae60;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 10px;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-    
-<div class="container">
-    <div class="logo-container">
-      <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/1752413014861.png" alt="GrowUp Logo" />
-    </div>
 
-    <h1>Welcome To GrowUp Trading</h1>
+<div class="container">
+
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/nepjob/Esewa/refs/heads/main/1752413014861.png" alt="GrowUp Logo" />
+  </div>
+
+  <h1>Welcome to growup trading</h1>
+
+  <div>
+    <h2>Invest now and Get Your Profit</h2>
+
+    <div class="back-btn" onclick="history.back()">← Back</div>
 
     <div class="top-bar">
-      <button class="earnings-btn" onclick="window.location.href='withdraw.html'">💰Your Earnings</button>
+      <button class="earnings" title="Rewards Button" onclick="location.href='3dot.html'">Rewards</button>
+      <button class="earnings" title="Your Rewards" onclick="location.href='withdraw.html'">$Balance</button>
     </div>
 
-    <div class="section-title">🕯𝐓𝐎𝐃𝐀𝐘 𝐁𝐄𝐒𝐓 𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐎𝐅𝐅𝐄𝐑 🕯</div>
+    <button class="btn-invest" onclick="startInvest()">Start invest now</button>
+
+    <div class="offer-header">🕯 TODAY'S BEST SPECIAL OFFER 🕯</div>
+
+    <div class="special-offer">
+      <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZm94MHdpbTB3YjY3NGl3YTdtNmVybG9lbWlncnY0eThrZno0Y3I4MCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/sgTMINOA908LfcmUWh/source.gif" alt="Special Offer - Until 10AM" />
+      <div class="special-offer-text">Limited Offer Will Be Changed In 6hr</div>
+    </div>
 
     <table>
       <thead>
         <tr><th>Investment</th><th>Profit</th></tr>
       </thead>
       <tbody>
-        <tr><td>✅ Invest ₹3000/-</td><td>₹8000/- 📊</td></tr>
-        <tr><td>✅ Invest ₹5000/-</td><td>₹10000/- 📊</td></tr>
-        <tr><td>✅ Invest ₹10000/-</td><td>₹72000/- 📊</td></tr>
-        <tr><td>✅ Invest ₹20000/-</td><td>₹90000/- 📊</td></tr>
-        <tr><td>✅ Invest ₹30000/-</td><td>₹120000/- 📊</td></tr>
-        <tr><td>✅ Invest ₹50000/-</td><td>₹1.5 Lac 📊</td></tr>
+        <tr><td>✅ Invest ₹3700/-</td><td>₹9400/- 📊USDT</td></tr>
+        <tr><td>✅ Invest ₹8000/-</td><td>₹28900/- 📊USDT</td></tr>
+        <tr><td>✅ Invest ₹10000/-</td><td>₹99290/- 📊BNB (only for level 1 users)</td></tr>
+        <tr><td>✅ Invest ₹50000/-</td><td>₹118000/- 📊MRC</td></tr>
+        <tr><td>✅ Invest ₹80000/-</td><td>₹210,000/- 📊WTC</td></tr>
+        <tr><td>✅ Invest ₹1lakh/-</td><td>₹510,000/- 📊BTC</td></tr>
+        <tr><td>✅ Invest ₹1BTC/-</td><td>₹1File/- 📊BTC</td></tr>
       </tbody>
     </table>
 
     <div class="note">NOTE : 💵 MONEY WILL BE CREDITED IN YOUR ACCOUNT UNDER 30-45 MINUTES. ✅️</div>
 
-    <div class="section-title">💰 Earnings Features (Unlock at Level 2)</div>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <span class="feature-icon">🎁</span>
-        <span class="feature-label">Daily Reward</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🎯</span>
-        <span class="feature-label">Spin Wheel</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">📈</span>
-        <span class="feature-label">Trade Now</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">👫</span>
-        <span class="feature-label">Reference & Earn</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🏢</span>
-        <span class="feature-label">Invest in Company</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">💱</span>
-        <span class="feature-label">Buy & Exchange Coin</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">📺</span>
-        <span class="feature-label">Watch Videos & Earn</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🎮</span>
-        <span class="feature-label">Play Games & Earn</span>
-        <span class="feature-badge">🔒 Locked</span>
-      </div>
-    </div>
-
     <div class="charts">
-      <canvas id="investorChart" width="400" height="250"></canvas>
-      <canvas id="btcChart" width="400" height="250"></canvas>
+      <canvas id="usersChart" width="400" height="250" title="Live Users & Profit Growth"></canvas>
+      <canvas id="btcChart" width="400" height="250" title="Live Bitcoin Trading Rates"></canvas>
     </div>
 
-    <div class="box-note">
-      Other Features Will Be Available After Reaching Level 2 🚀
+    <div class="btc-trading">
+      BTC Price: <span id="btcPrice">--</span> USD |
+      Trading Volume: <span id="btcVolume">--</span> |
+      Active Traders: <span id="btcTraders">--</span>
     </div>
+
+    <div class="level-note">Other features will be open after reaching 2nd level.</div>
+
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const investorCtx = document.getElementById('investorChart').getContext('2d');
-    const btcCtx = document.getElementById('btcChart').getContext('2d');
+<a class="whatsapp-float" href="https://wa.me/9769922786?text=Can%20You%20assist%20me%20For%20Invisting" target="_blank" title="Chat on WhatsApp">💬</a>
 
-    new Chart(investorCtx, {
+<script>
+  function startInvest() {
+    const phone = '9779704888854';
+    const message = encodeURIComponent('I want to invest');
+    const url = `https://wa.me/${phone}?text=${message}`;
+    window.open(url, '_blank');
+  }
+
+  const usersCtx = document.getElementById('usersChart').getContext('2d');
+  const btcCtx = document.getElementById('btcChart').getContext('2d');
+
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+  script.onload = () => {
+    const usersChart = new Chart(usersCtx, {
       type: 'line',
       data: {
-        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
         datasets: [{
-          label: 'Investors Joined',
-          data: [300, 500, 800, 1200, 1500],
+          label: 'Users',
+          data: [5, 15, 40, 55, 70, 80],
           borderColor: '#27ae60',
           backgroundColor: 'rgba(39, 174, 96, 0.3)',
           fill: true,
-          tension: 0.4
+          tension: 0.3,
+          pointRadius: 4
+        },
+        {
+          label: 'Profit',
+          data: [2, 10, 25, 40, 50, 60],
+          borderColor: '#2980b9',
+          backgroundColor: 'rgba(41, 128, 185, 0.3)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4
         }]
       },
       options: {
-        plugins: { legend: { labels: { color: '#2c3e50' } } },
+        responsive: true,
+        plugins: { legend: { labels: { color: '#34495e' } } },
         scales: {
-          x: { ticks: { color: '#2c3e50' } },
-          y: { beginAtZero: true, ticks: { color: '#2c3e50' } }
+          x: { ticks: { color: '#34495e' } },
+          y: { ticks: { color: '#34495e' }, beginAtZero: true }
         }
       }
     });
 
-    new Chart(btcCtx, {
+    const btcChart = new Chart(btcCtx, {
       type: 'bar',
       data: {
         labels: ['BTC Price', 'Trading Volume', 'Active Traders'],
         datasets: [{
-          label: 'Live Stats',
-          data: [30000, 45000, 21000],
-          backgroundColor: ['#f39c12', '#2980b9', '#e67e22']
+          label: 'Value',
+          data: [30000, 45000, 2000],
+          backgroundColor: ['#f39c12', '#f1c40f', '#e67e22']
         }]
       },
       options: {
+        responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: '#2c3e50' } },
-          y: { beginAtZero: true, ticks: { color: '#2c3e50' } }
+          x: { ticks: { color: '#34495e' } },
+          y: { ticks: { color: '#34495e' }, beginAtZero: true }
         }
       }
     });
-  </script>
+
+    document.getElementById('btcPrice').textContent = '$30,000';
+    document.getElementById('btcVolume').textContent = '45,000';
+    document.getElementById('btcTraders').textContent = '2,000';
+  };
+
+  document.head.appendChild(script);
+</script>
 
 </body>
 </html>
