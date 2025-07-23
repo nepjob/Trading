@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Growme Login</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(270deg, #ff7e5f, #feb47b, #86a8e7, #7f7fd5);
+      background-size: 800% 800%;
+      animation: gradientBG 20s ease infinite;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .container {
+      background: rgba(0,0,0,0.5);
+      border-radius: 16px;
+      padding: 30px 40px;
+      width: 350px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      position: relative;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1.8rem;
+      letter-spacing: 1.2px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+      box-shadow: 0 0 8px 2px #00c6ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px 0;
+      margin-top: 10px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid white;
+      margin-top: 15px;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: #0072ff;
+      border-color: #0072ff;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .back-button:hover {
+      color: #00c6ff;
+    }
+
+    .sticker {
+      font-size: 3rem;
+      margin-bottom: 18px;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      position: absolute;
+    }
+
+    .visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+      position: relative;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: #ff4e42;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+  <section id="loginPage" class="container visible" aria-label="Login form">
+    <div class="sticker" aria-hidden="true">🔐</div>
+    <h2>Welcome to Growme</h2>
+    <input type="text" id="loginUsername" placeholder="Username" aria-label="Username" autocomplete="username" />
+    <input type="password" id="loginPassword" placeholder="Password" aria-label="Password" autocomplete="current-password" />
+    <button id="loginBtn">Login</button>
+    <button id="createAccountBtn" class="btn-secondary">Create a New Account</button>
+    <p id="loginMessage" class="message" role="alert" aria-live="polite"></p>
+  </section>
+
+  <!-- CREATE ACCOUNT PAGE -->
+  <section id="createAccountPage" class="container hidden" aria-label="Create new account form">
+    <button class="back-button" id="backBtn" aria-label="Go back to login page" title="Back">←</button>
+    <div class="sticker" aria-hidden="true">📦</div>
+    <h2>Create New Account</h2>
+    <input type="text" id="packageId" placeholder="Enter Your Package ID" aria-label="Package ID" />
+    <button id="submitPackageBtn">Submit</button>
+    <p id="packageMessage" class="message" role="alert" aria-live="polite"></p>
+  </section>
+
+  <script>
+    // DOM Elements
+    const loginPage = document.getElementById('loginPage');
+    const createAccountPage = document.getElementById('createAccountPage');
+    const loginBtn = document.getElementById('loginBtn');
+    const createAccountBtn = document.getElementById('createAccountBtn');
+    const backBtn = document.getElementById('backBtn');
+    const submitPackageBtn = document.getElementById('submitPackageBtn');
+    const loginMessage = document.getElementById('loginMessage');
+    const packageMessage = document.getElementById('packageMessage');
+
+    // Hardcoded credentials
+    const validUsername = 'Growme';
+    const validPassword = '@grow4';
+
+    // Show Create Account page
+    createAccountBtn.addEventListener('click', () => {
+      loginMessage.textContent = '';
+      loginPage.classList.remove('visible');
+      loginPage.classList.add('hidden');
+
+      createAccountPage.classList.remove('hidden');
+      createAccountPage.classList.add('visible');
+    });
+
+    // Back to Login
+    backBtn.addEventListener('click', () => {
+      packageMessage.textContent = '';
+      createAccountPage.classList.remove('visible');
+      createAccountPage.classList.add('hidden');
+
+      loginPage.classList.remove('hidden');
+      loginPage.classList.add('visible');
+    });
+
+    // Login Logic
+    loginBtn.addEventListener('click', () => {
+      loginMessage.textContent = '';
+
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      if(username === validUsername && password === validPassword){
+        window.location.href = 'Das.html';
+      } else {
+        loginMessage.textContent = 'Incorrect Username or Password';
+      }
+    });
+
+    // ❌ Reject all package IDs
+    submitPackageBtn.addEventListener('click', () => {
+      packageMessage.style.color = '#ff4e42';
+      packageMessage.textContent = 'Wrong Package ID. Please try again.';
+    });
+
+    // Support Enter key
+    document.getElementById('loginPassword').addEventListener('keyup', (e) => {
+      if(e.key === 'Enter') loginBtn.click();
+    });
+    document.getElementById('packageId').addEventListener('keyup', (e) => {
+      if(e.key === 'Enter') submitPackageBtn.click();
+    });
+  </script>
+</body>
+</html>
